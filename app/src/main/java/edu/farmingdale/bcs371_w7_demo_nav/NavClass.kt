@@ -63,11 +63,21 @@ fun Navigation() {
         }
 
         // ToDo 7: Add more nav screens here for the pizza party and gpa calculator
+        //done
+        composable("pizza_party") {
+            PizzaPartyScreen(navController)
+        }
 
+        composable("gpa_calculator") {
+            gpaappFun(navController)
+        }
 
     }
-
 }
+
+
+
+
 
 @Composable
 fun FirstScreen(navController: NavController) {
@@ -81,6 +91,14 @@ fun FirstScreen(navController: NavController) {
                 Text(text ="Go to Second Screen")
             }
 
+            Button(onClick = { navController.navigate("pizza_party") }) {
+                Text(text ="Go to Pizza Party")
+            }
+
+            Button(onClick = { navController.navigate("gpa_calculator") }) {
+                Text(text ="Go to GPA Calculator")
+            }
+
         }
     }
 }
@@ -91,12 +109,13 @@ fun FirstScreen(navController: NavController) {
 @Composable
 fun SecondScreen(navController: NavController) {
     var sliderValue by remember { mutableStateOf(0.5f) }
+    var boxcheck by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
     Column ( modifier = Modifier.padding(horizontal = 20.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally){
-        Slider(value = sliderValue, onValueChange = { sliderValue=it }, Modifier.fillMaxWidth())
+        Slider(value = sliderValue, onValueChange = { sliderValue=it }, Modifier.fillMaxWidth(), enabled = boxcheck)
 
         Text (fontSize = 20.sp, text = "Second Screen")
 
@@ -105,7 +124,8 @@ fun SecondScreen(navController: NavController) {
         }
 
         // ToDo 8: when the switch is off, disable the slider
-        Checkbox(checked = true, onCheckedChange = {  }, modifier = Modifier.padding(10.dp))
+        //done
+        Checkbox(checked = boxcheck, onCheckedChange = { boxcheck = it }, modifier = Modifier.padding(10.dp))
 
     }
 
